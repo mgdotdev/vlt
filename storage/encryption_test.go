@@ -7,7 +7,7 @@ import (
 func _assert(t *testing.T) func(bool) {
 	return func(item bool) {
 		if item == false {
-			t.Errorf("failed assertion")
+			t.Errorf("AssertionError")
 		}
 	}
 }
@@ -16,7 +16,8 @@ func TestEncryption(t *testing.T) {
 	assert := _assert(t)
 	key := "encryption_key"
 	expected := "fake_password"
-	temp := encrypt(expected, key)
-	actual := decrypt(temp, key)
+	nonce := "asdfasdfasdf"
+	temp := encrypt(expected, key, nonce)
+	actual := decrypt(temp, key, nonce)
 	assert(expected == actual)
 }
